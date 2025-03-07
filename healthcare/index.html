@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Appointment Data</title>
+    <link rel="stylesheet" href="style.css"> <!-- Link to the external CSS file -->
+</head>
+<body>
+    <div class="container">
+        
+        <div class="nav">
+            <a href="home.html">Home</a>
+            <a href="index.html">Appointment Scheduling</a>
+            <a href="view-appointment.html">View Appointment</a>
+            <a href="patient-details.html">Medical History</a>
+            <a href="doctors.html">Our Doctors</a>
+            <a href="about-us.html">About Us</a>
+            <a href="contact-us.html">Contact Us</a>
+        </div>
+    
+        <div class="container">
+            <h1>Schedule Appointment</h1>
+        
+            <label for="patientId">Patient ID:</label><br>
+            <input type="text" name="patientId" id="patientId"><br>
+            
+            <label for="name">Name:</label><br>
+            <input type="text" name="name" id="name"><br>
+          
+            <label for="age">Age:</label><br>
+            <input type="text" name="age" id="age"><br>
+    
+            <label for="department">Department:</label><br>
+            <select name="department" id="department">
+                <option value="" disabled selected>Select Department</option>
+                <option value="General Medicine">General Medicine</option>
+                <option value="Cardiology">Cardiology</option>
+                <option value="Orthopedics">Orthopedics</option>
+                <option value="Pediatrics">Pediatrics</option>
+                <option value="Dermatology">Dermatology</option>
+            </select><br>
+            
+            <label for="doctorName">Doctor Name:</label><br>
+            <select id="doctorName" name="doctorName">
+                <option value="Dr. Smith">Dr. Smith (General Medicine)</option>
+                <option value="Dr. Patel">Dr. Patel (Cardiology)</option>
+                <option value="Dr. Brown">Dr. Brown (Orthopedics)</option>
+                <option value="Dr. Lee">Dr. Lee (Pediatrics)</option>
+                <option value="Dr. Turner">Dr. Turner (Dermatology)</option>
+            </select><br>
+            
+            <label for="date">Appointment Date:</label><br>
+            <input type="date" name="date" id="date"><br>
+            
+            <label for="time">Appointment Time:</label><br>
+            <select name="time" id="time">
+                <option value="" disabled selected>Select Time</option>
+                <option value="9:00 AM">9:00 AM</option>
+                <option value="11:00 AM">11:00 AM</option>
+                <option value="1:00 PM">1:00 PM</option>
+                <option value="3:00 PM">3:00 PM</option>
+                <option value="5:00 PM">5:00 PM</option>
+            </select><br>
+            
+            <br>       
+            <!-- Medical History Upload Option -->
+            <label for="medicalHistory">Do you have a medical history to upload?</label><br>
+            <input type="checkbox" id="medicalHistory" name="medicalHistory" value="Yes">
+            <label for="medicalHistory">Yes.</label><br>
+            
+            <div id="pdfUpload" style="display:none;">
+                <label for="pdfFile">Upload Medical History (PDF):</label><br>
+                <input type="file" id="pdfFile" name="pdfFile" accept=".pdf"><br>
+            </div>
+            
+            <br>       
+            <input type="submit" id="insertPatient" value="Save Appointment Data">
+            <p id="patientSaved"></p>
+        </div>
+        
+        <script src="scripts.js"></script>
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.0/jquery.min.js"></script>
+        
+        <script>
+            // JavaScript to toggle the PDF upload field visibility based on checkbox
+            document.getElementById("medicalHistory").addEventListener("change", function() {
+                var pdfUploadSection = document.getElementById("pdfUpload");
+                if (this.checked) {
+                    pdfUploadSection.style.display = "block";
+                } else {
+                    pdfUploadSection.style.display = "none";
+                }
+            });
+
+            // JavaScript to handle the saving of appointment data
+            document.getElementById("insertPatient").addEventListener("click", function() {
+                // Collect form data here
+                var patientId = document.getElementById("patientId").value;
+                var name = document.getElementById("name").value;
+                var age = document.getElementById("age").value;
+                var department = document.getElementById("department").value;
+                var doctorName = document.getElementById("doctorName").value;
+                var date = document.getElementById("date").value;
+                var time = document.getElementById("time").value;
+                var medicalHistory = document.getElementById("medicalHistory").checked;
+                var pdfFile = document.getElementById("pdfFile").files[0];
+
+                // Prepare data for the API
+                var appointmentData = {
+                    "patientId": patientId,
+                    "name": name,
+                    "age": age,
+                    "department": department,
+                    "doctorName": doctorName,
+                    "date": date,
+                    "time": time
+                };
+
+                // If a medical history file is uploaded, include it in the data
+                if (medicalHistory && pdfFile) {
+                    var reader = new FileReader();
+                    reader.onload = function(e) {
+                        appointmentData.medicalHistoryPDF = e.target.result.split(',')[1];
+                        saveAppointmentData(appointmentData);
+                    };
+                    reader.readAsDataURL(pdfFile);
+                } else {
+                    saveAppointmentData(appointmentData);
+                }
+            });
+
+            // Function to save appointment data to API
+            function saveAppointmentData(data) {
+                var API_ENDPOINT = "https://1kinkv4ghg.execute-api.us-east-1.amazonaws.com/prod";  // Replace with actual endpoint
+
+                $.ajax({
+                    url: API_ENDPOINT,
+                    type: 'POST',
+                    data: JSON.stringify(data),
+                    contentType: 'application/json; charset=utf-8',
+                    success: function(response) {
+                        console.log("Response from API:", response);
+                        document.getElementById("patientSaved").innerText = "Appointment data saved successfully!";
+                        resetForm();
+                    },
+                    error: function(xhr, status, error) {
+                        console.error("Error saving data:", xhr.responseText || error);
+                        alert(`Error saving data: ${xhr.responseText || error}`);
+                    }
+                });
+            }
+
+            // Reset form after saving appointment data
+            function resetForm() {
+                document.getElementById("patientId").value = "";
+                document.getElementById("name").value = "";
+                document.getElementById("age").value = "";
+                document.getElementById("department").value = "";
+                document.getElementById("doctorName").value = "";
+                document.getElementById("date").value = "";
+                document.getElementById("time").value = "";
+                document.getElementById("medicalHistory").checked = false;
+                document.getElementById("pdfFile").value = "";
+            }
+        </script>
+    </body>
+</html>

@@ -1,0 +1,398 @@
+/* Body Background - Dark Blue */
+body {
+    font-family: Arial, sans-serif;
+}
+.image-container img {
+    width: 60%; /* Reduce the image size to 60% of the container's width */
+    max-width: 400px; /* Limit the maximum width of the image to 400px */
+    height: auto; /* Maintain the aspect ratio */
+    border-radius: 15px; /* Soft rounded corners */
+    border: 5px solid #33CCCC; /* Soft white border with transparency */
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2); /* Soft shadow around the image */
+    display: block; /* Center the image */
+    margin: 0 auto; /* Automatically adjust margin for centering */
+}
+
+body {
+    background-color: #bcf2e5; /* Dark Blue background outside the container */
+    color: #333;
+    font-family: 'Merriweather', serif; /* Elegant font */
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Navbar remains unchanged */
+.nav {
+    margin-top: -23px; /* Shift the taskbar 10px up */
+}
+
+.nav {
+    display: flex;
+    justify-content: space-around;
+    background-color: #007bff; /* Blue background for navbar */
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.nav a {
+    color: white;
+    text-decoration: none;
+    padding: 10px;
+    border-radius: 5px;
+    transition: all 0.3s ease-in-out;
+}
+
+.nav a:hover {
+    background-color: hwb(211 2% 38%); /* Darker blue on hover */
+    transform: scale(1.1); /* Zoom effect */
+}
+
+/* Container Styling */
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    margin-top: 20px;
+    padding: 30px;
+    background-color: #D1E8FF; /* Lighter pastel blue background */
+    border: 5px solid #33CCCC; /* Dark blue border */
+    border-radius: 15px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+    flex-grow: 1;
+}
+
+/* Input Textbox Styling */
+input[type="text"], input[type="email"], input[type="password"], textarea {
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0;
+    border: 2px solid #1E3A8A; /* Dark Blue Border */
+    border-radius: 8px; /* Soft rounded corners */
+    background-color: #E3F2FD; /* Light blue background for input fields */
+    font-size: 16px;
+    color: #333;
+    transition: all 0.3s ease;
+}
+
+input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focus, textarea:focus {
+    border-color: #007bff; /* Blue border on focus */
+    outline: none; /* Remove default outline */
+    background-color: #D1E8FF; /* Slightly darker shade for focus */
+}
+
+/* Text Area Styling */
+textarea {
+    height: 150px;
+    resize: vertical;
+}
+
+/* Headings */
+h1 {
+    color: #1C6D6B; /* Dark teal color */
+    font-size: 36px;
+    font-weight: 700;
+    font-style: italic;
+    text-align: center;
+}
+
+/* Paragraph Styling */
+p {
+    line-height: 1.8;
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+    font-style: italic;
+}
+
+/* Footer Styling */
+.footer {
+    text-align: center;
+    padding: 15px;
+    background-color: #007bff;
+    color: white;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    font-size: 14px;
+    border-top: 2px solid #fff;
+}
+
+/* Footer Links */
+.footer a {
+    color: white;
+    text-decoration: none;
+    padding: 5px 10px;
+    margin: 5px;
+    border-radius: 5px;
+    background-color: #1E3A8A;
+}
+
+.footer a:hover {
+    background-color: #0056b3;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+/* Doctor Image Styling */
+
+/* Custom Select Dropdown Styling */
+select {
+    width: 200px; /* Adjust the width of the dropdown */
+    padding: 10px; /* Add padding for better spacing */
+    background-color: #E0F7FA; /* Light baby blue background color */
+    border: 2px solid #1C6D6B; /* Dark blue border color */
+    border-radius: 8px; /* Rounded corners */
+    color: #333; /* Text color */
+    font-size: 16px; /* Font size for the options */
+    font-family: 'Arial', sans-serif; /* Font family */
+    appearance: none; /* Removes default dropdown arrow */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Light shadow for depth */
+}
+
+/* Style for the dropdown container */
+select:focus {
+    outline: none; /* Removes the default focus outline */
+    border-color: #00695C; /* Darker blue border on focus */
+}
+
+/* Add custom arrow icon for the select dropdown */
+select::-ms-expand {
+    display: none; /* Hide the default arrow in IE */
+}
+
+select::after {
+    content: '\2193'; /* Add a downwards arrow */
+    font-size: 18px;
+    color: #1C6D6B;
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+}
+
+/* Optional: For the select options, customize their appearance */
+option {
+    background-color: #E0F7FA; /* Light baby blue background */
+    color: #1C6D6B; /* Dark blue text color */
+    padding: 10px; /* Padding for the options */
+    font-size: 16px;
+}
+
+/* Hover effect on options */
+option:hover {
+    background-color: #B2EBF2; /* Slightly darker blue on hover */
+}
+/* Button Styling */
+button {
+    background-color: #007bff; /* Blue background */
+    color: white; /* White text */
+    font-size: 16px; /* Font size */
+    padding: 12px 20px; /* Padding for button */
+    border: none; /* Remove border */
+    border-radius: 8px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: all 0.3s ease; /* Smooth transition on hover */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Light shadow for depth */
+    font-family: 'Arial', sans-serif; /* Font family */
+    width: 220px; /* Width of the button */
+}
+
+/* Button hover effect */
+button:hover {
+    background-color: #0056b3; /* Darker blue when hovering */
+    transform: translateY(-2px); /* Slight raise effect on hover */
+}
+
+/* Button focus effect */
+button:focus {
+    outline: none; /* Remove default outline on focus */
+    border: 2px solid #0056b3; /* Blue border when focused */
+}
+
+/* Button active effect */
+button:active {
+    background-color: #004085; /* Even darker blue when clicked */
+    transform: translateY(1px); /* Slight downward effect when clicked */
+}
+
+/* For buttons like Save Appointment and View Appointment */
+.save-appointment, .view-appointment {
+    background-color: #1E88E5; /* Light blue */
+}
+
+.save-appointment:hover, .view-appointment:hover {
+    background-color: #1565C0; /* Darker blue for hover */
+}
+
+/* Optional: If you want different colors for other specific buttons */
+.cancel-appointment {
+    background-color: #FF7043; /* Red for cancel button */
+}
+
+.cancel-appointment:hover {
+    background-color: #D32F2F; /* Darker red on hover */
+}
+/* Styling for the Submit Button */
+input[type="submit"] {
+    background-color: #007bff; /* Blue background */
+    color: white; /* White text */
+    font-size: 16px; /* Font size */
+    padding: 12px 20px; /* Padding for the button */
+    border: none; /* Remove default border */
+    border-radius: 8px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: all 0.3s ease; /* Smooth transition for hover */
+    font-family: 'Arial', sans-serif; /* Font family */
+    width: 220px; /* Width of the button */
+    margin-top: 10px; /* Space above the button */
+}
+
+/* Button hover effect */
+input[type="submit"]:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+    transform: translateY(-2px); /* Slight raise effect on hover */
+}
+
+/* Button focus effect */
+input[type="submit"]:focus {
+    outline: none; /* Remove default outline on focus */
+    border: 2px solid #0056b3; /* Blue border when focused */
+}
+
+/* Button active effect */
+input[type="submit"]:active {
+    background-color: #004085; /* Even darker blue when clicked */
+    transform: translateY(1px); /* Slight downward effect when clicked */
+}
+/* Styling for the Header Section */
+/* Styling for the Header Section */
+.header {
+    background-color: #33cccc; /* Dark blue background */
+    color: white; /* Default white text color */
+    padding: 50px 20px; /* Padding around the header */
+    text-align: center; /* Center-align text */
+    font-family: 'Arial', sans-serif; /* Font family */
+}
+
+/* Styling for the Main Header Text */
+.header h1 {
+    font-size: 48px; /* Increased font size for better visibility */
+    font-weight: bold; /* Bold font for emphasis */
+    color: #494948; /* Bright gold color for the main title to stand out */
+}
+
+/* Styling for the Subtitle Text */
+.header p {
+    font-size: 20px; /* Slightly larger font size for better readability */
+    font-style: italic; /* Italic style for the subtitle */
+    color: #ffffff; /* Light grey color for subtitle, ensuring it's visible without overpowering */
+}
+/* Styling for the Image */
+/* Styling for the Image */
+.image-container img {
+    width: 60%; /* Reduce the image size to 60% of the container's width */
+    max-width: 400px; /* Limit the maximum width of the image to 400px */
+    height: auto; /* Maintain the aspect ratio */
+    border-radius: 15px; /* Soft rounded corners */
+    border: 5px solid #33CCCC; /* Soft white border with transparency */
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2); /* Soft shadow around the image */
+    display: block; /* Center the image */
+    margin: 0 auto; /* Automatically adjust margin for centering */
+}
+/* The panel where doctor details will slide in */
+.doctor-panel {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 50%;
+    height: 100%;
+    background-color: #fff;
+    box-shadow: -2px 0 5px rgba(0,0,0,0.5);
+    padding: 20px;
+    transform: translateX(100%); /* Initially hidden off the screen */
+    transition: transform 0.3s ease-in-out;
+    z-index: 100;
+}
+
+/* Style for each doctor's details */
+.doctor-details {
+    display: none;
+}
+
+.doctor-panel img {
+    width: 100%;
+    max-height: 200px;
+    object-fit: cover;
+}
+
+
+/* Doctor details container with transition */
+.doctor-details-container {
+    position: relative;
+    width: 100%;
+    overflow: hidden; /* Hide the overflow for smooth transition */
+    transform: translateX(100%); /* Initially positioned off-screen */
+}
+
+/* Individual doctor details */
+.doctor-details {
+    display: none; /* Hide all doctor details initially */
+    padding: 20px;
+    background-color: #f4f4f4;
+    margin: 10px 0;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.doctor-details img {
+    width: 100%;
+    max-height: 200px;
+    object-fit: cover;
+}
+
+h2, h3 {
+    color: #333;
+}
+
+ul {
+    list-style-type: square;
+    padding-left: 20px;
+}
+
+/* Doctor details container with transition */
+.doctor-details-container {
+    position: relative;
+    width: 100%;
+    overflow: hidden; /* Hide the overflow for smooth transition */
+    transform: translateX(100%); /* Initially positioned off-screen */
+}
+
+/* Individual doctor details */
+.doctor-details {
+    display: none; /* Hide all doctor details initially */
+    padding: 20px;
+    background-color: #f4f4f4;
+    margin: 10px 0;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Doctor image styling for oval shape */
+.doctor-details img {
+    width: 100px; /* Adjust width for smaller image */
+    height: 100px; /* Adjust height for smaller image */
+    object-fit: cover; /* Ensure the image covers the area properly */
+    border-radius: 50%; /* Oval shape */
+    margin-right: 20px; /* Space between the image and text */
+}
+
+/* Styling for doctor name, experience, and other details */
+h2, h3 {
+    color: #333;
+}
+

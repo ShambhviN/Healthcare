@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctors with Dynamic Slider</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        h1 {
+            margin-top: 20px;
+            margin-bottom: 30px;
+        }
+
+        .doctor-list {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .doctor-item {
+            margin: 10px;
+            padding: 10px 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: #f0f0f0;
+            transition: background-color 0.3s ease;
+        }
+
+        .doctor-item:hover {
+            background-color: #d0d0d0;
+        }
+
+        .slider-container {
+            position: relative;
+            width: 90%;
+            max-width: 800px;
+            margin: 20px auto;
+            overflow: hidden;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            background: #f9f9f9;
+            display: none; /* Hidden by default */
+        }
+
+        .slider {
+            display: flex;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .slide {
+            min-width: 100%;
+            box-sizing: border-box;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .doctor-photo {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            margin-bottom: 20px;
+            border-radius: 50%;
+        }
+
+        .arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            font-size: 20px;
+            z-index: 4;
+        }
+
+        .arrow-left {
+            left: 10px;
+        }
+
+        .arrow-right {
+            right: 10px;
+        }
+
+        .dots {
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+        }
+
+        .dot {
+            height: 12px;
+            width: 12px;
+            margin: 0 5px;
+            background-color: #bbb;
+            border-radius: 50%;
+            cursor: pointer;
+            display: inline-block;
+            transition: background-color 0.3s ease;
+        }
+
+        .dot.active {
+            background-color: #717171;
+        }
+        body
+        {
+        background-color: #bcf2e5; /* Dark Blue background outside the container */
+        color: #333;
+        font-family: 'Merriweather', serif; /* Elegant font */
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        }
+
+    /* Navbar remains unchanged */
+    .nav {
+        margin-top: -23px; /* Shift the taskbar 10px up */
+        }
+
+    .nav {
+        display: flex;
+        justify-content: space-around;
+        background-color: #007bff; /* Blue background for navbar */
+        padding: 10px;
+        border-radius: 5px;
+        margin-bottom: 20px;
+        }
+
+    .nav a {
+        color: white;
+        text-decoration: none;
+        padding: 10px;
+        border-radius: 5px;
+        transition: all 0.3s ease-in-out;
+    }
+
+    .nav a:hover {
+        background-color: hwb(211 2% 38%); /* Darker blue on hover */
+        transform: scale(1.1); /* Zoom effect */
+    }
+
+    /* Container Styling */
+    .container {
+        max-width: 900px;
+        margin: 0 auto;
+        margin-top: 20px;
+        padding: 30px;
+        background-color: #D1E8FF; /* Lighter pastel blue background */
+        border: 5px solid #33CCCC; /* Dark blue border */
+        border-radius: 15px;
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+        flex-grow: 1;
+    }
+    h1 {
+        color: #1C6D6B; /* Dark teal color */
+        font-size: 36px;
+        font-weight: 700;
+        font-style: italic;
+        text-align: center;
+    }
+
+
+    /* Paragraph Styling */
+    p{
+        line-height: 1.8;
+        font-size: 18px;
+        color: #333;
+        margin-bottom: 20px;
+        text-align: center;
+        font-style: italic;
+    }
+</style>
+</head>
+<body>
+    <div class="container">
+        <div class="nav">
+            <a href="home.html">Home</a>
+            <a href="index.html">Appointment Scheduling</a> <!-- Added link to appointment scheduling -->
+            <a href="view-appointment.html">View Appointment</a>
+            <a href="patient-details.html">Medical History</a>
+            <a href="doctors.html">Our Doctors</a> <!-- Added link to doctors page -->
+            <a href="about-us.html">About Us</a>
+            <a href="contact-us.html">Contact Us</a>
+        </div>
+        <h1>Our Experienced Doctors</h1>
+    <!-- Doctor List -->
+    <div class="doctor-list" id="doctorList">
+        <div class="doctor-item" onclick="showDoctorSlider(0)">Dr. John Smith</div>
+        <div class="doctor-item" onclick="showDoctorSlider(1)">Dr. Rahul Patel</div>
+        <div class="doctor-item" onclick="showDoctorSlider(2)">Dr. Emily Brown</div>
+        <div class="doctor-item" onclick="showDoctorSlider(3)">Dr. Alice Lee</div>
+        <div class="doctor-item" onclick="showDoctorSlider(4)">Dr. Emma Turner</div>
+    </div>
+
+    <!-- Sliders -->
+    <div class="slider-container" id="doctorSlider0">
+        <div class="slider">
+            <div class="slide">
+                <img src="doctor1.jpg" alt="Dr. Smith" class="doctor-photo">
+                <h2>Dr. John Smith</h2>
+                <p><strong>Specialization:</strong> General Medicine</p>
+                <p><strong>Experience:</strong> 10+ years in treating general health conditions</p>
+            </div>
+            <div class="slide">
+                <h2>Education</h2>
+                <p><strong>Education:</strong> MD in General Medicine from Harvard Medical School</p>
+                <p><strong>Awards:</strong> Best General Physician, 2022</p>
+                <p><strong>Expertise:</strong> Dr. Smith focuses on overall health care, prevention, and early diagnosis</p>
+                <p><strong>Philosophy:</strong> Believes in holistic health care and early intervention</p>
+            </div>
+            <div class="slide">
+                <h2>Contact</h2>
+                <p><strong>Location:</strong> 123 Health Street, City</p>
+                <p><strong>Phone:</strong> +1 (555) 123-4567</p>
+                <p><strong>Email:</strong> dr.smith@healthcare.com</p>
+                <p><strong>Available Timings:</strong> Monday - Friday: 9:00 AM - 5:00 PM</p>
+            </div>
+        </div>
+        <button class="arrow arrow-left" onclick="moveSlide(-1, 0)">&#10094;</button>
+        <button class="arrow arrow-right" onclick="moveSlide(1, 0)">&#10095;</button>
+        <div class="dots" id="dots0"></div>
+    </div>
+
+    <div class="slider-container" id="doctorSlider1">
+        <div class="slider">
+            <div class="slide">
+                <img src="doctor2.jpg" alt="Dr. Patel" class="doctor-photo">
+                <h2>Dr. Rahul Patel</h2>
+                <p><strong>Specialization:</strong> Cardiology</p>
+                <p><strong>Experience:</strong> 12+ years in diagnosing and treating heart-related diseases.</p>
+            </div>
+            <div class="slide">
+                <h2>Education</h2>
+                <p><strong>Education:</strong> MD in Cardiology from Johns Hopkins University</p>
+                <p><strong>Awards:</strong> Best Cardiologist, 2019; Excellence in Cardiology, 2021</p>
+                <p><strong>Expertise:</strong> Dr. Patel specializes in heart disease diagnosis, treatment, and prevention</p>
+                <p><strong>Philosophy:</strong> Believes in personalized care and promoting heart health through education</p>
+            </div>
+            <div class="slide">
+                <h2>Contact</h2>
+                <p><strong>Location:</strong> 456 Heart Avenue, City</p>
+                <p><strong>Phone:</strong> "+1 (234) 678-910</p>
+                <p><strong>Email:</strong> dr.patel@healthcare.com</p>
+                <p><strong>Available Timings:</strong> Monday - Friday: 9:00 AM - 5:00 PM</p>
+            </div>
+        </div>
+        <button class="arrow arrow-left" onclick="moveSlide(-1, 1)">&#10094;</button>
+        <button class="arrow arrow-right" onclick="moveSlide(1, 1)">&#10095;</button>
+        <div class="dots" id="dots1"></div>
+    </div>
+
+    <div class="slider-container" id="doctorSlider2">
+        <div class="slider">
+            <div class="slide">
+                <img src="doctor3.jpg" alt="Dr. Brown" class="doctor-photo">
+                <h2>Dr. Emily Brown</h2>
+                <p><strong>Specialization:</strong> Orthopedics</p>
+                <p><strong>Experience:</strong> 15+ years in diagnosing and treating musculoskeletal disorders.</p>
+            </div>
+            <div class="slide">
+                <h2>Education</h2>
+                <p><strong>Education:</strong> MD in Orthopedics from Johns Hopkins University</p>
+                <p><strong>Awards:</strong> Best Orthopedic Surgeon, 2023</p>
+                <p><strong>Expertise:</strong> Dr. Brown specializes in joint replacement and orthopedic surgery.</p>
+                <p><strong>Philosophy:</strong> Focused on restoring mobility and improving quality of life through surgery.</p>
+            </div>
+            <div class="slide">
+                <h2>Contact</h2>
+                <p><strong>Location:</strong> 789 Bone Street, City, City</p>
+                <p><strong>Phone:</strong> "+1 (547) 640-257</p>
+                <p><strong>Email:</strong> dr.brown@healthcare.com</p>
+                <p><strong>Available Timings:</strong> Monday - Friday: 9:00 AM - 5:00 PM</p>
+            </div>
+        </div>
+        <button class="arrow arrow-left" onclick="moveSlide(-1, 2)">&#10094;</button>
+        <button class="arrow arrow-right" onclick="moveSlide(1, 2)">&#10095;</button>
+        <div class="dots" id="dots2"></div>
+    </div>
+    <div class="slider-container" id="doctorSlider3">
+        <div class="slider">
+            <div class="slide">
+                <img src="doctor4.jpg" alt="Dr. Lee" class="doctor-photo">
+                <h2>Dr. Alice Lee</h2>
+                <p><strong>Specialization:</strong> Pediatrics</p>
+                <p><strong>Experience:</strong> 8+ years in pediatric care and childhood diseases</p>
+            </div>
+            <div class="slide">
+                <h2>Education</h2>
+                <p><strong>Education:</strong> MD in Pediatrics from University of California</p>
+                <p><strong>Awards:</strong> Pediatrician of the Year, 2020</p>
+                <p><strong>Expertise:</strong> Dr. Lee focuses on child health, vaccination, and pediatric care</p>
+                <p><strong>Philosophy:</strong> Committed to providing compassionate care for children and their families.</p>
+            </div>
+            <div class="slide">
+                <h2>Contact</h2>
+                <p><strong>Location:</strong> 254 Brooke Street, Brooke</p>
+                <p><strong>Phone:</strong> "+1 (754) 893-242</p>
+                <p><strong>Email:</strong> dr.lee@healthcare.com</p>
+                <p><strong>Available Timings:</strong> Monday - Friday: 9:00 AM - 5:00 PM</p>
+            </div>
+        </div>
+        <button class="arrow arrow-left" onclick="moveSlide(-1, 3)">&#10094;</button>
+        <button class="arrow arrow-right" onclick="moveSlide(1, 3)">&#10095;</button>
+        <div class="dots" id="dots3"></div>
+    </div>
+    <div class="slider-container" id="doctorSlider4">
+        <div class="slider">
+            <div class="slide">
+                <img src="doctor5.jpg" alt="Dr. Turner" class="doctor-photo">
+                <h2>Dr. Emma Turner</h2>
+                <p><strong>Specialization:</strong> Dermatology</p>
+                <p><strong>Experience:</strong> 10+ years in treating skin diseases and cosmetic dermatology</p>
+            </div>
+            <div class="slide">
+                <h2>Education</h2>
+                <p><strong>Education:</strong> MD in Dermatology from Yale University</p>
+                <p><strong>Awards:</strong> Excellence in Dermatology, 2022</p>
+                <p><strong>Expertise:</strong> Dr. Turner specializes in skin conditions, cosmetic dermatology, and surgeries</p>
+                <p><strong>Philosophy:</strong> Focused on helping patients achieve healthy, radiant skin</p>
+            </div>
+            <div class="slide">
+                <h2>Contact</h2>
+                <p><strong>Location:</strong> 654 Skin Avenue, Road</p>
+                <p><strong>Phone:</strong> +1 (567) 890-1234</p>
+                <p><strong>Email:</strong> dr.turner@healthcare.com</p>
+                <p><strong>Available Timings:</strong> Monday - Friday: 9:00 AM - 5:00 PM</p>
+            </div>
+        </div>
+        <button class="arrow arrow-left" onclick="moveSlide(-1, 4)">&#10094;</button>
+        <button class="arrow arrow-right" onclick="moveSlide(1, 4)">&#10095;</button>
+        <div class="dots" id="dots4"></div>
+    </div>
+    </div>
+
+    <script>
+        let currentSlides = [0, 0, 0];
+        const sliders = document.querySelectorAll('.slider-container');
+
+        document.addEventListener('DOMContentLoaded', () => {
+            sliders.forEach((slider, index) => {
+                const dotsContainer = slider.querySelector('.dots');
+                const slides = slider.querySelectorAll('.slide');
+
+                // Generate dots
+                for (let i = 0; i < slides.length; i++) {
+                    const dot = document.createElement('div');
+                    dot.classList.add('dot');
+                    if (i === 0) dot.classList.add('active');
+                    dot.onclick = () => goToSlide(i, index);
+                    dotsContainer.appendChild(dot);
+                }
+
+                slider.style.display = 'none';
+            });
+        });
+
+        function showDoctorSlider(index) {
+            sliders.forEach((slider, i) => {
+                slider.style.display = i === index ? 'block' : 'none';
+            });
+        }
+
+        function moveSlide(direction, doctorIndex)
+        {
+            const slider = sliders[doctorIndex].querySelector('.slider');
+            const slides = slider.querySelectorAll('.slide');
+            const dots = sliders[doctorIndex].querySelectorAll('.dot');
+            
+            currentSlides[doctorIndex] += direction;
+            if (currentSlides[doctorIndex] < 0) currentSlides[doctorIndex] = slides.length - 1;
+            if (currentSlides[doctorIndex] >= slides.length) currentSlides[doctorIndex] = 0;
+
+            slider.style.transform = `translateX(-${currentSlides[doctorIndex] * 100}%)`;
+
+            // Update dots
+            dots.forEach((dot, i) => {
+                dot.classList.toggle('active', i === currentSlides[doctorIndex]);
+            });
+        }
+
+        function goToSlide(slideIndex, doctorIndex) {
+            const slider = sliders[doctorIndex].querySelector('.slider');
+            const dots = sliders[doctorIndex].querySelectorAll('.dot');
+
+            currentSlides[doctorIndex] = slideIndex;
+            slider.style.transform = `translateX(-${currentSlides[doctorIndex] * 100}%)`;
+
+            // Update dots
+            dots.forEach((dot, i) => {
+                dot.classList.toggle('active', i === currentSlides[doctorIndex]);
+            });
+        }
+    </script>
+</body>
+</html>

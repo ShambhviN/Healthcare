@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Appointment Data</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* General Table Styling */
+        #patientData {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            font-family: Arial, sans-serif;
+        }
+
+        #patientData th, #patientData td {
+            border: 1px solid #007BFF;  /* Blue border */
+            padding: 12px;
+            text-align: center;
+        }
+
+        /* Header Styling with Blue Background */
+        #patientData th {
+            background-color: #007BFF;  /* Blue background for header */
+            color: white;  /* White text */
+        }
+
+        /* Even Row Styling */
+        #patientData tr:nth-child(even) {
+            background-color: #e6f0ff;  /* Light blue for even rows */
+        }
+
+        /* Odd Row Styling */
+        #patientData tr:nth-child(odd) {
+            background-color: #ffffff;  /* White for odd rows */
+        }
+
+        /* Hover Effect for Rows */
+        #patientData tr:hover {
+            background-color: #cce0ff;  /* Slightly darker blue when hovering */
+        }
+
+        /* Column Widths */
+        #patientData colgroup col:nth-child(1) { width: 10%; }
+        #patientData colgroup col:nth-child(2) { width: 12%; }
+        #patientData colgroup col:nth-child(3) { width: 15%; }
+        #patientData colgroup col:nth-child(4) { width: 14%; }
+        #patientData colgroup col:nth-child(5) { width: 10%; }
+        #patientData colgroup col:nth-child(6) { width: 14%; }
+        #patientData colgroup col:nth-child(7) { width: 12%; }
+        #patientData colgroup col:nth-child(8) { width: 13%; }
+        #patientData colgroup col:nth-child(9) { width: 20%; }
+
+        /* Button Styling */
+        #getPatient {
+            padding: 10px 20px;
+            background-color: #007BFF;  /* Blue background for button */
+            color: white;
+            border: none;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+
+        #getPatient:hover {
+            background-color: #0056b3;  /* Darker blue on hover */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="nav">
+            <a href="home.html">Home</a>
+            <a href="index.html">Appointment Scheduling</a>
+            <a href="view-appointment.html">View Appointment</a>
+            <a href="patient-details.html">Medical History</a>
+            <a href="doctors.html">Our Doctors</a>
+            <a href="about-us.html">About Us</a>
+            <a href="contact-us.html">Contact Us</a>
+        </div>
+        
+        <h1>View Existing Appointments</h1>
+        <button id="getPatient">View All Appointments</button>
+        <br><br>
+
+        <div id="showPatients">
+            <table id="patientData">
+                <colgroup>
+                    <col>
+                    <col>
+                    <col>
+                    <col>
+                    <col>
+                    <col>
+                    <col>
+                    <col>
+                    <col>
+                </colgroup>
+                <thead>
+                    <tr>
+                        <th>Appointment ID</th>
+                        <th>Patient ID</th>
+                        <th>Name</th>
+                        <th>Department</th>
+                        <th>Age</th>
+                        <th>Doctor Name</th>
+                        <th>Date</th>
+                        <th>Time</th>
+                        <th>Medical History (PDF)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Appointment data will be displayed here -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="scripts.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.0/jquery.min.js"></script>
+
+    <script>
+        document.getElementById("getPatient").addEventListener("click", function() {
+            fetch("https://1kinkv4ghg.execute-api.us-east-1.amazonaws.com/prod")  // Replace with your API Gateway URL
+                .then(response => response.json())
+                .then(data => {
+                    const tbody = document.querySelector("#patientData tbody");
+                    tbody.innerHTML = ''; // Clear any existing rows
+
+                    data.forEach(appointment => {
+                        const row = document.createElement("tr");
+                        // Check if medical history (PDF) is available and link it
+                        const medicalHistory = appointment.medicalHistory && appointment.medicalHistory !== 'No medical history provided' 
+                            ? `<a href="${appointment.medicalHistory}" target="_blank">View PDF</a>` 
+                            : 'N/A';
+                        
+                        row.innerHTML = `
+                            <td>${appointment.appointmentId}</td>
+                            <td>${appointment.patientId}</td>
+                            <td>${appointment.name}</td>
+                            <td>${appointment.department}</td>
+                            <td>${appointment.age}</td>
+                            <td>${appointment.doctorName}</td>
+                            <td>${appointment.date}</td>
+                            <td>${appointment.time}</td>
+                            <td>${medicalHistory}</td>
+                        `;
+                        tbody.appendChild(row);
+                    });
+                })
+                .catch(error => {
+                    console.error('Error fetching appointments:', error);
+                });
+        });
+    </script>
+</body>
+</html>

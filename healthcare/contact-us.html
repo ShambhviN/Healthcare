@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us</title>
+    <link rel="stylesheet" href="style.css"> <!-- Link to the external CSS file -->
+</head>
+    <div class="container">
+        <div class="nav">
+            <a href="home.html">Home</a>
+            <a href="index.html">Appointment Scheduling</a> <!-- Added link to appointment scheduling -->
+            <a href="view-appointment.html">View Appointment</a>
+            <a href="patient-details.html">Medical History</a>
+            <a href="doctors.html">Our Doctors</a> <!-- Added link to doctors page -->
+            <a href="about-us.html">About Us</a>
+            <a href="contact-us.html">Contact Us</a>
+        </div>
+        <h1>Contact Us</h1>
+        <p>If you have any questions or need assistance, please don't hesitate to reach out to us. We're here to help!</p>
+
+        <form id="contactForm">
+            <label for="name">Your Name:</label><br>
+            <input type="text" id="name" name="name" required><br>
+
+            <label for="email">Your Email:</label><br>
+            <input type="email" id="email" name="email" required><br>
+
+            <label for="message">Your Message:</label><br>
+            <textarea id="message" name="message" required></textarea><br>
+
+            <input type="submit" value="Send Message">
+        </form>
+
+        <!-- Dummy response message -->
+        <div class="response-message" id="responseMessage">
+            <p>Your message has been shared. You will receive a response soon!</p>
+        </div>
+
+        <div class="contact-info">
+            <h2>Hospital Contact Information</h2>
+            <p><strong>Email:</strong> contact@healthcarehospital.com</p>
+            <p><strong>Phone:</strong> +1 234 567 890</p>
+            <p><strong>Address:</strong> 123 Healthcare Street, Cityville, Country</p>
+        </div>
+    </div>
+
+    
+    <script>
+        // JavaScript to simulate form submission and show dummy success message
+        document.getElementById("contactForm").onsubmit = function(event) {
+            event.preventDefault(); // Prevent form submission
+
+            // Show the dummy response message
+            document.getElementById("responseMessage").style.display = 'block';
+
+            // Clear form inputs (optional)
+            document.getElementById("contactForm").reset();
+        };
+    </script>
+</body>
+</html>
